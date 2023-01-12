@@ -55,8 +55,8 @@
 </script>
 
 <main class="flex py-4 flex-col justify-center min-h-screen">
-    <div class="text-teal-400 w-full flex-col flex items-center">
-        <div class="border-2 px-4 pb-4 w-4/5 border-gray-500 rounded-lg">
+    <div class="text-teal-400 w-full flex-col flex items-center px-4">
+        <div class="border-2 px-4 pb-4 md:w-4/5 w-full border-gray-500 rounded-lg">
             {#if data.stopName}
                 <div class="border-b-2 border-gray-500 mb-4 py-4">
                     <h1 class="text-3xl">{data.stopName}</h1>
