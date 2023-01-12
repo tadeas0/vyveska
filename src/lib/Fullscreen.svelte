@@ -1,4 +1,3 @@
-<!-- Fullscreen.svelte -->
 <script lang="ts">
     import { onMount } from "svelte";
     import MdFullscreen from "svelte-icons/md/MdFullscreen.svelte";
@@ -25,6 +24,11 @@
         isFull = !isFull;
     };
 
+    const fsChange = () => {
+        if (document.fullscreenElement) isFull = true;
+        else isFull = false;
+    };
+
     $: icon = isFull ? MdFullscreenExit : MdFullscreen;
 </script>
 
@@ -34,6 +38,7 @@
     class:h-screen={isFull}
     class:bg-gray-900={isFull}
     bind:this={fsContainer}
+    on:fullscreenchange={fsChange}
 >
     <slot {isFull} />
     {#if fullscreenEnabled}

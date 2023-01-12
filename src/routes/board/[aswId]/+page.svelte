@@ -54,7 +54,7 @@
     });
 </script>
 
-<main class="py-6">
+<main class="flex py-4 flex-col justify-center min-h-screen">
     <div class="text-teal-400 w-full flex-col flex items-center">
         <div class="border-2 px-4 pb-4 w-4/5 border-gray-500 rounded-lg">
             {#if data.stopName}
