@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Station } from "src/interfaces/Station";
-    import { fade, fly } from "svelte/transition";
+    import { fly } from "svelte/transition";
     import FaSearch from "svelte-icons/fa/FaSearch.svelte";
 
     let stationName: string = "";
@@ -27,7 +27,7 @@
                 bind:value={stationName}
                 on:input={getStations}
                 placeholder="Název stanice..."
-                class="bg-transparent text-xl md:text-4xl font-semibold outline-none text-gray-300 placeholder:text-gray-600"
+                class="bg-transparent w-full text-xl md:text-4xl font-semibold outline-none text-gray-300 placeholder:text-gray-600"
             />
         </div>
         <div class="w-full">

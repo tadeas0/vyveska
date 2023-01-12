@@ -1,6 +1,7 @@
 <script lang="ts">
     import { invalidate } from "$app/navigation";
     import type { DateDifference } from "src/interfaces/DateDifference";
+    import Fullscreen from "$lib/Fullscreen.svelte";
     import { onMount } from "svelte";
     import type { PageServerData } from "./$types";
 

@@ -1,5 +1,8 @@
 <script>
+    import Fullscreen from "$lib/Fullscreen.svelte";
     import "../app.css";
 </script>
 
-<slot />
+<Fullscreen>
+    <slot />
+</Fullscreen>
