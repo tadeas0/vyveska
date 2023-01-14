@@ -4,6 +4,7 @@
 
     const selectLocale = (l: string) => {
         locale.set(l);
+        localStorage.setItem("locale", l);
     };
 </script>
 
