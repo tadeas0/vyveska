@@ -3,6 +3,7 @@
     import { fly } from "svelte/transition";
     import FaSearch from "svelte-icons/fa/FaSearch.svelte";
     import { goto } from "$app/navigation";
+    import { _, locale } from "svelte-i18n";
 
     let stationName: string = "";
     let selected: number = 0;
@@ -37,7 +38,7 @@
 
 <svelte:body on:keydown={handleKeyDown} />
 
-<main class="py-10 px-6 flex flex-col items-center">
+<div class="px-6 flex flex-col items-center">
     <div class="w-full md:w-4/5">
         <div class="md:p-4 w-full p-2 border-b-2 border-gray-500 flex flex-row items-center">
             <div class="md:w-7 md:mr-6 w-4 mr-4 text-gray-500">
@@ -47,7 +48,7 @@
                 bind:value={stationName}
                 on:input={getStations}
                 bind:this={inputEl}
-                placeholder="Název stanice..."
+                placeholder={$_("stopName")}
                 class="bg-transparent w-full text-xl md:text-4xl font-semibold outline-none text-gray-300 placeholder:text-gray-600"
             />
         </div>
@@ -72,4 +73,4 @@
             {/if}
         </div>
     </div>
-</main>
+</div>
