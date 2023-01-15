@@ -8,11 +8,11 @@ const DEFAULT_SKIP = 0;
 
 const prepName = (stationName: string): string => {
     return stationName
-        .replace(/[\W_]+/g, " ") // replace nonaplhanumeric
-        .replace(/\s\s+/g, " ") // replace multiple whitespace chars
         .toLowerCase()
         .normalize("NFD")
-        .replace(/\p{Diacritic}/gu, "");
+        .replace(/\p{Diacritic}/gu, "") // replace diacritic
+        .replace(/[\W_]+/g, " ") // replace nonaplhanumeric
+        .replace(/\s\s+/g, " "); // replace multiple whitespace chars
 };
 
 export const GET: RequestHandler = async ({ url }) => {
