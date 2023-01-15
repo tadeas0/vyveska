@@ -59,13 +59,13 @@
     });
 </script>
 
-<div class="text-teal-400 w-full flex-col flex items-center px-4">
-    <div class="px-4 pb-4 md:w-4/5 w-full rounded-lg">
+<div class="flex w-full flex-col items-center px-4 text-teal-400">
+    <div class="w-full rounded-lg px-4 pb-4 md:w-4/5">
         {#if data.stopName}
-            <div class="border-b-2 border-gray-500 mb-4 py-4">
+            <div class="mb-4 border-b-2 border-gray-500 py-4">
                 <h1 class="text-3xl">{data.stopName}</h1>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {#each filteredArrivals as arrival}
                     <div class="py-2">
                         <h2>
@@ -73,11 +73,11 @@
                             {#if arrival.node}
                                 <a
                                     href="/board/{arrival.node}"
-                                    class="text-xl ml-2 text-emerald-400 hover:underline"
+                                    class="ml-2 text-xl text-emerald-400 hover:underline"
                                     >{arrival.destination}</a
                                 >
                             {:else}
-                                <span class="text-xl ml-2 text-emerald-400"
+                                <span class="ml-2 text-xl text-emerald-400"
                                     >{arrival.destination}</span
                                 >
                             {/if}

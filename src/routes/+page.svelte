@@ -38,10 +38,10 @@
 
 <svelte:body on:keydown={handleKeyDown} />
 
-<div class="px-6 flex flex-col items-center">
+<div class="flex flex-col items-center px-6">
     <div class="w-full md:w-4/5">
-        <div class="md:p-4 w-full p-2 border-b-2 border-gray-500 flex flex-row items-center">
-            <div class="md:w-7 md:mr-6 w-4 mr-4 text-gray-500">
+        <div class="flex w-full flex-row items-center border-b-2 border-gray-500 p-2 md:p-4">
+            <div class="mr-4 w-4 text-gray-500 md:mr-6 md:w-7">
                 <FaSearch />
             </div>
             <input
@@ -49,7 +49,7 @@
                 on:input={getStations}
                 bind:this={inputEl}
                 placeholder={$_("stopName")}
-                class="bg-transparent w-full text-xl md:text-4xl font-semibold outline-none text-gray-300 placeholder:text-gray-600"
+                class="w-full bg-transparent text-xl font-semibold text-gray-300 outline-none placeholder:text-gray-600 md:text-4xl"
             />
         </div>
         <div class="w-full">
@@ -59,7 +59,7 @@
                         {#each stations as station, i}
                             <li class="border-b-2 border-gray-700">
                                 <a
-                                    class="text-gray-300 md:p-4 p-3 w-full hover:bg-gray-800 focus:underline h-full inline-block"
+                                    class="inline-block h-full w-full p-3 text-gray-300 hover:bg-gray-800 focus:underline md:p-4"
                                     class:bg-gray-800={i === selected}
                                     class:underline={i === selected}
                                     href="/board/{station.node}"

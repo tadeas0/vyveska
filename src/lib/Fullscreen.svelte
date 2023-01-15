@@ -43,7 +43,7 @@
     <slot {isFull} />
     {#if fullscreenEnabled}
         <button
-            class="top-6 right-6 translate-x-1/2 -translate-y-1/2 absolute w-10 text-gray-500 hover:w-12"
+            class="absolute top-6 right-6 w-10 translate-x-1/2 -translate-y-1/2 text-gray-500 hover:w-12"
             on:click={fsToggle}
         >
             <svelte:component this={icon} />

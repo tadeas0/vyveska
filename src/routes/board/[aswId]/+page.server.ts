@@ -14,7 +14,7 @@ export const load: PageServerLoad = async ({ params, depends, fetch }) => {
             "/pid/departureboards?" +
             new URLSearchParams({
                 aswIds: aswId.toString(),
-                limit: "10",
+                limit: String(ARRIVAL_NUM * 2),
                 skip: "canceled",
                 order: "real",
                 minutesBefore: "1",
