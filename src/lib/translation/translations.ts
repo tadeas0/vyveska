@@ -1,20 +1,24 @@
 import { browser } from "$app/environment";
-import { addMessages, init } from "svelte-i18n";
-import en from "./locales/en.json";
-import cs from "./locales/cs.json";
+import { init, register } from "svelte-i18n";
 
 const defaultLocale = "en";
 
 export const initTranslation = async () => {
     console.log("init translation");
 
-    addMessages("en", en);
-    addMessages("cs", cs);
+    let loc: string;
+    if (browser) {
+        register("en", () => import("./locales/en.json"));
+        register("cs", () => import("./locales/cs.json"));
+        loc = localStorage.getItem("locale") || window.navigator.language;
+    } else {
+        register("en", () => import("./locales/en-static.json"));
+        register("cs", () => import("./locales/cs-static.json"));
+        loc = defaultLocale;
+    }
 
     await init({
         fallbackLocale: defaultLocale,
-        initialLocale: browser
-            ? localStorage.getItem("locale") || window.navigator.language
-            : defaultLocale
+        initialLocale: loc
     });
 };
