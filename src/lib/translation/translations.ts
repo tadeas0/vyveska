@@ -3,12 +3,16 @@ import { init, register } from "svelte-i18n";
 
 const defaultLocale = "en";
 
-register("en", () => import("./locales/en.json"));
-register("cs", () => import("./locales/cs.json"));
+export const initTranslation = async () => {
+    console.log("init translation");
 
-init({
-    fallbackLocale: defaultLocale,
-    initialLocale: browser
-        ? localStorage.getItem("locale") || window.navigator.language
-        : defaultLocale
-});
+    register("en", () => import("./locales/en.json"));
+    register("cs", () => import("./locales/cs.json"));
+
+    await init({
+        fallbackLocale: defaultLocale,
+        initialLocale: browser
+            ? localStorage.getItem("locale") || window.navigator.language
+            : defaultLocale
+    });
+};
