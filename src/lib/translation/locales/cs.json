@@ -1,6 +1,6 @@
 {
     "stopName": "Název stanice...",
-    "second": "{count, plural, =0 {# vteřin} one {# vteřiny} few {# vteřin} other {# vteřin}}",
+    "second": "{count, plural, =0 {# vteřin} one {# vteřina} few {# vteřin} other {# vteřin}}",
     "minute": "{count, plural, =0 {# minut} one {# minuta} few {# minuty} other {# minut}}",
     "hour": "{count, plural, =0 {# hodin} one {# hodina} few {# hodiny} other {# hodin}}",
     "atStop": "Ve stanici",

@@ -1,17 +1,21 @@
 <script lang="ts">
-    import { invalidate } from "$app/navigation";
     import type { DateDifference } from "src/interfaces/DateDifference";
     import { onMount } from "svelte";
     import type { PageServerData } from "./$types";
     import { _ } from "svelte-i18n";
+    import { ARRIVAL_NUM } from "$lib/constants";
+    import { page } from "$app/stores";
+    import { parseArrival } from "$lib/common/helpers";
 
     export let data: PageServerData;
 
+    let arrivals = data.arrivals;
+    let stopName = data.stopName;
     let currentTime: Date = new Date();
 
-    $: filteredArrivals = data.arrivals
+    $: filteredArrivals = arrivals
         .filter((a) => a.time > currentTime || a.isAtStop)
-        .slice(0, 6);
+        .slice(0, ARRIVAL_NUM);
 
     const getDateDiff = (startDate: Date, endDate: Date): DateDifference => {
         const msInSec = 1000;
@@ -49,24 +53,33 @@
     };
 
     onMount(async () => {
-        const invalidateInterval = setInterval(() => invalidate("departures"), 5000);
+        const fetchInterval = setInterval(
+            () =>
+                fetch(`/api/departure/${$page.params.aswId}?limit=${ARRIVAL_NUM * 2}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        arrivals = data.arrivals.map(parseArrival);
+                        stopName = data.stopName;
+                    }),
+            5000
+        );
         const timeInterval = setInterval(() => (currentTime = new Date()), 1000);
 
         return () => {
-            clearInterval(invalidateInterval);
             clearInterval(timeInterval);
+            clearInterval(fetchInterval);
         };
     });
 </script>
 
 <div class="flex w-full flex-col items-center px-4 text-teal-400">
     <div class="w-full rounded-lg px-4 pb-4 md:w-4/5">
-        {#if data.stopName}
+        {#if stopName}
             <div class="mb-4 border-b-2 border-gray-500 py-4">
-                <h1 class="text-3xl">{data.stopName}</h1>
+                <h1 class="text-3xl">{stopName}</h1>
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {#each filteredArrivals as arrival}
+                {#each filteredArrivals as arrival (arrival.name + arrival.time.toString())}
                     <div class="py-2">
                         <h2>
                             <span class="text-2xl text-cyan-500">{arrival.name}</span>
