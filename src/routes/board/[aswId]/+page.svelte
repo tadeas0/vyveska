@@ -1,68 +1,45 @@
 <script lang="ts">
-    import type { DateDifference } from "src/interfaces/DateDifference";
     import { onMount } from "svelte";
     import type { PageServerData } from "./$types";
     import { _ } from "svelte-i18n";
     import { ARRIVAL_NUM } from "$lib/constants";
     import { page } from "$app/stores";
     import { parseArrival } from "$lib/common/helpers";
+    import ArrivalDisplay from "$lib/components/ArrivalDisplay.svelte";
+    import type { Arrival } from "src/interfaces/Arrival";
 
     export let data: PageServerData;
 
     let arrivals = data.arrivals;
     let stopName = data.stopName;
     let currentTime: Date = new Date();
+    let pageNum = 1;
+    let noMoreArrivals = false;
+    let scrollY: number;
 
     $: filteredArrivals = arrivals
         .filter((a) => a.time > currentTime || a.isAtStop)
-        .slice(0, ARRIVAL_NUM);
+        .slice(0, pageNum * ARRIVAL_NUM);
 
-    const getDateDiff = (startDate: Date, endDate: Date): DateDifference => {
-        const msInSec = 1000;
-        const msInMin = 60 * msInSec;
-        const msInHour = 60 * msInMin;
-        const msInDay = 24 * msInHour;
-
-        const diff = (startDate: Date, endDate: Date, mod: number, granularity: number): number => {
-            return Math.floor(((endDate.getTime() - startDate.getTime()) % mod) / granularity);
-        };
-
-        return {
-            days: diff(startDate, endDate, 1, msInDay),
-            hours: diff(startDate, endDate, msInDay, msInHour),
-            minutes: diff(startDate, endDate, msInHour, msInMin),
-            seconds: diff(startDate, endDate, msInMin, msInSec)
-        };
-    };
-
-    const getDisplayDiff = (startDate: Date, endDate: Date): string => {
-        const valCount = (count: number) => ({ values: { count } });
-
-        const diff = getDateDiff(startDate, endDate);
-
-        if (diff.days >= 1) {
-            return $_("day", valCount(diff.days)) + " " + $_("hour", valCount(diff.hours));
-        } else if (diff.hours >= 1) {
-            return $_("hour", valCount(diff.hours)) + " " + $_("minute", valCount(diff.minutes));
-        } else if (diff.minutes >= 1) {
-            return (
-                $_("minute", valCount(diff.minutes)) + " " + $_("second", valCount(diff.seconds))
-            );
+    const fetchData = async () => {
+        const res = await fetch(
+            `/api/departure/${$page.params.aswId}?limit=${pageNum * (ARRIVAL_NUM + 5)}`
+        );
+        const data = await res.json();
+        const parsedArrivals: Arrival[] = data.arrivals.map(parseArrival);
+        const parsedJson = JSON.stringify(parsedArrivals[parsedArrivals.length - 1]);
+        const arrivalJson = JSON.stringify(arrivals[arrivals.length - 1]);
+        if (parsedJson === arrivalJson) {
+            noMoreArrivals = true;
+            return;
         }
-        return $_("second", valCount(diff.seconds));
+        arrivals = parsedArrivals;
+        stopName = data.stopName;
     };
 
     onMount(async () => {
-        const fetchInterval = setInterval(
-            () =>
-                fetch(`/api/departure/${$page.params.aswId}?limit=${ARRIVAL_NUM * 2}`)
-                    .then((res) => res.json())
-                    .then((data) => {
-                        arrivals = data.arrivals.map(parseArrival);
-                        stopName = data.stopName;
-                    }),
-            5000
-        );
+        scrollY = 0;
+        const fetchInterval = setInterval(fetchData, 5000);
         const timeInterval = setInterval(() => (currentTime = new Date()), 1000);
 
         return () => {
@@ -70,7 +47,20 @@
             clearInterval(fetchInterval);
         };
     });
+
+    const handleScroll = async () => {
+        if (noMoreArrivals) return;
+
+        const offset = 50;
+
+        if (window.innerHeight + scrollY > document.body.offsetHeight - offset) {
+            pageNum += 1;
+            await fetchData();
+        }
+    };
 </script>
+
+<svelte:window on:scroll={handleScroll} bind:scrollY />
 
 <div class="flex w-full flex-col items-center px-4 text-teal-400">
     <div class="w-full rounded-lg px-4 pb-4 md:w-4/5">
@@ -79,30 +69,8 @@
                 <h1 class="text-3xl">{stopName}</h1>
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {#each filteredArrivals as arrival (arrival.name + arrival.time.toString())}
-                    <div class="py-2">
-                        <h2>
-                            <span class="text-2xl text-cyan-500">{arrival.name}</span>
-                            {#if arrival.node}
-                                <a
-                                    href="/board/{arrival.node}"
-                                    class="ml-2 text-xl text-emerald-400 hover:underline"
-                                    >{arrival.destination}</a
-                                >
-                            {:else}
-                                <span class="ml-2 text-xl text-emerald-400"
-                                    >{arrival.destination}</span
-                                >
-                            {/if}
-                        </h2>
-                        {#if arrival.isAtStop}
-                            <h3 class="text-lg text-gray-400">{$_("atStop")}</h3>
-                        {:else}
-                            <h3 class="text-lg">
-                                {getDisplayDiff(currentTime, arrival.time)}
-                            </h3>
-                        {/if}
-                    </div>
+                {#each filteredArrivals as arrival (arrival)}
+                    <ArrivalDisplay {arrival} {currentTime} />
                 {/each}
             </div>
         {:else}

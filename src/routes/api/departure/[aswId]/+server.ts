@@ -10,6 +10,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
     const aswId = params.aswId;
 
     const limit = Number(url.searchParams.get("limit")) || DEFAULT_LIMIT;
+    const offset = Number(url.searchParams.get("offset")) || 0;
 
     const res = await fetch(
         API_URL +
@@ -17,6 +18,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
             new URLSearchParams({
                 aswIds: aswId,
                 limit: limit.toString(),
+                offset: offset.toString(),
                 skip: "canceled",
                 order: "real",
                 minutesBefore: "1",
