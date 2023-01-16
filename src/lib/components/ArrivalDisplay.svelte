@@ -10,7 +10,9 @@
 
 <div class="py-2">
     <h2>
-        <span class="text-2xl text-cyan-500">{arrival.name}</span>
+        <a class="text-2xl text-cyan-500 hover:underline" href="/board/vehicle/{arrival.name}"
+            >{arrival.name}</a
+        >
         <span class="ml-2 text-xl text-emerald-400 ">
             <StationLink station={arrival.destination} />
         </span>
