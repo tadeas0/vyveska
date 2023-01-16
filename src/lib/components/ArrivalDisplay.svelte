@@ -45,12 +45,14 @@
 <div class="py-2">
     <h2>
         <span class="text-2xl text-cyan-500">{arrival.name}</span>
-        {#if arrival.node}
-            <a href="/board/{arrival.node}" class="ml-2 text-xl text-emerald-400 hover:underline"
-                >{arrival.destination}</a
+        {#if arrival.destination.node}
+            <a
+                href="/board/{arrival.destination.node}"
+                class="ml-2 text-xl text-emerald-400 hover:underline"
+                >{arrival.destination.fullName}</a
             >
         {:else}
-            <span class="ml-2 text-xl text-emerald-400">{arrival.destination}</span>
+            <span class="ml-2 text-xl text-emerald-400">{arrival.destination.fullName}</span>
         {/if}
     </h2>
     {#if arrival.isAtStop}

@@ -36,14 +36,17 @@ export const GET: RequestHandler = async ({ url, params }) => {
     const arrivals: Arrival[] = data.departures.map((d: any) => ({
         name: d.route.short_name,
         time: new Date(d.arrival_timestamp.predicted),
-        destination: d.trip.headsign,
+        destination: {
+            fullName: d.trip.headsign,
+            names: []
+        },
         isAtStop: d.trip.is_at_stop
     }));
 
     arrivals.forEach((a) => {
-        const n = stops.nodes.find((n) => n.names.includes(a.destination));
+        const n = stops.nodes.find((n) => n.names.includes(a.destination.fullName));
         if (n !== undefined) {
-            a.node = n.node;
+            a.destination = n;
         }
     });
 

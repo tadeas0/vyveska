@@ -1,7 +1,8 @@
+import type { Station } from "./Station";
+
 export interface Arrival {
     name: string;
     time: Date;
-    destination: string;
+    destination: Station;
     isAtStop: boolean;
-    node?: number;
 }
