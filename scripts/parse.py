@@ -19,5 +19,5 @@ for i in stops["stopGroups"]:
         if name not in nodes[i["node"]]["names"]:
             nodes[i["node"]]["names"].append(name)
 
-with open("src/stops.json", "w") as f:
+with open("../src/stops.json", "w") as f:
     json.dump({"nodes": list(nodes.values())}, f, ensure_ascii=False)
