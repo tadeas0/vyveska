@@ -28,6 +28,10 @@ export const GET: RequestHandler = async ({ url, params, fetch }) => {
     });
     const data = await res.json();
 
+    if (data.features.length === 0) {
+        throw error(404, "No data for this vehicle");
+    }
+
     const vehicleName: string = data.features[0].properties.trip.origin_route_name;
     const vehicleType: string = data.features[0].properties.trip.vehicle_type.description_en;
     const positions = data.features.map((p: any) => {
