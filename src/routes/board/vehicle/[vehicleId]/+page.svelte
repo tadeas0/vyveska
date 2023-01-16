@@ -37,14 +37,14 @@
             <div class="py-2">
                 <div class="flex flex-row items-center gap-2">
                     {#if position.lastStop}
-                        <h2 class="text-xl text-emerald-400">
+                        <h2 class="hidden text-xl text-emerald-400 md:flex">
                             <StationLink station={position.lastStop} />
                         </h2>
                     {/if}
-                    <div class="w-4  text-teal-400">
+                    <div class="w-4 text-teal-400">
                         <FaLongArrowAltRight />
                     </div>
-                    <h2 class="text-xl text-emerald-400 ">
+                    <h2 class="text-xl text-emerald-400">
                         <StationLink station={position.nextStop} />
                     </h2>
                 </div>
