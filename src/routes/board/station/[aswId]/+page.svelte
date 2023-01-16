@@ -8,6 +8,7 @@
     import ArrivalDisplay from "$lib/components/ArrivalDisplay.svelte";
     import type { Arrival } from "src/interfaces/Arrival";
     import { currentTime } from "$lib/stores/currentTime";
+    import Board from "$lib/components/Board.svelte";
 
     export let data: PageServerData;
 
@@ -39,10 +40,8 @@
     onMount(async () => {
         scrollY = 0;
         const fetchInterval = setInterval(fetchData, 5000);
-        const timeInterval = setInterval(() => ($currentTime = new Date()), 1000);
 
         return () => {
-            clearInterval(timeInterval);
             clearInterval(fetchInterval);
         };
     });
@@ -61,19 +60,11 @@
 
 <svelte:window on:scroll={handleScroll} bind:scrollY />
 
-<div class="flex w-full flex-col items-center px-4 text-teal-400">
-    <div class="w-full rounded-lg px-4 pb-4 md:w-4/5">
-        {#if stopName}
-            <div class="mb-4 border-b-2 border-gray-500 py-4">
-                <h1 class="text-3xl">{stopName}</h1>
-            </div>
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {#each filteredArrivals as arrival}
-                    <ArrivalDisplay {arrival} />
-                {/each}
-            </div>
-        {:else}
-            <h1 class="text-3xl">{$_("loading")}</h1>
-        {/if}
-    </div>
-</div>
+<Board>
+    <h1 slot="title" class="text-3xl">{stopName}</h1>
+    <svelte:fragment slot="items">
+        {#each filteredArrivals as arrival}
+            <ArrivalDisplay {arrival} />
+        {/each}
+    </svelte:fragment>
+</Board>

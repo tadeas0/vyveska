@@ -31,7 +31,7 @@
             event.preventDefault();
             inputEl.focus();
         } else if (event.key === "Enter" && stations.length > 0) {
-            goto(`/board/${stations[selected].node}`);
+            goto(`/board/station/${stations[selected].node}`);
         }
     };
 </script>
@@ -62,7 +62,7 @@
                                     class="inline-block h-full w-full p-3 text-gray-300 hover:bg-gray-800 focus:underline md:p-4"
                                     class:bg-gray-800={i === selected}
                                     class:underline={i === selected}
-                                    href="/board/{station.node}"
+                                    href="/board/station/{station.node}"
                                 >
                                     <h1 class="md:text-xl">{station.fullName}</h1>
                                 </a>
