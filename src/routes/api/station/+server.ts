@@ -28,9 +28,8 @@ export const GET: RequestHandler = async ({ url }) => {
     const limit = limitStr ? Number(limitStr) : DEFAULT_LIMIT;
     const namePrep = prepName(stationName);
     const filtered: Station[] = data.nodes.filter((n) => {
-        const prepFull = prepName(n.fullName);
-        const prep = prepName(n.name);
-        return prepFull.includes(namePrep) || prep.includes(namePrep);
+        const prepNames = n.names.map(prepName);
+        return prepNames.some((prep) => prep.includes(namePrep));
     });
     const sliced: Station[] = filtered.slice(skip, skip + limit);
     return json({ stations: sliced });

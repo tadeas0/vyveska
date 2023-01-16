@@ -1,17 +1,23 @@
 import json
+import requests
 
-with open("stops.json", "r") as f:
-    stops = json.load(f)
+res = requests.get("https://data.pid.cz/stops/json/stops.json")
+stops = res.json()
 
-nodes = []
+nodes = dict()
 node_ids = set()
 for i in stops["stopGroups"]:
+    altKeys = ["name", "fullName", "idosName", "uniqueName"]
+    names = set(i[alt] for alt in altKeys)
     if i["node"] not in node_ids:
-        nodes.append({
-            "name": i["name"],
+        nodes[i["node"]] = {
+            "names": [],
             "fullName": i["fullName"],
-            "node": i["node"]})
-        node_ids.add(i["node"])
+            "node": i["node"]
+        }
+    for name in names:
+        if name not in nodes[i["node"]]["names"]:
+            nodes[i["node"]]["names"].append(name)
 
-with open("stops_parsed.json", "w") as f:
-    json.dump({"nodes": nodes}, f, ensure_ascii=False)
+with open("src/stops.json", "w") as f:
+    json.dump({"nodes": list(nodes.values())}, f, ensure_ascii=False)

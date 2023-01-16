@@ -41,7 +41,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
     }));
 
     arrivals.forEach((a) => {
-        const n = stops.nodes.find((n) => n.name === a.destination || n.fullName === a.destination);
+        const n = stops.nodes.find((n) => n.names.includes(a.destination));
         if (n !== undefined) {
             a.node = n.node;
         }

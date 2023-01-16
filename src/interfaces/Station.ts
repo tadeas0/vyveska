@@ -1,5 +1,5 @@
 export interface Station {
-    name: string;
+    names: string[];
     fullName: string;
     node: number;
 }
