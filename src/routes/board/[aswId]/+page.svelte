@@ -7,18 +7,18 @@
     import { parseArrival } from "$lib/common/helpers";
     import ArrivalDisplay from "$lib/components/ArrivalDisplay.svelte";
     import type { Arrival } from "src/interfaces/Arrival";
+    import { currentTime } from "$lib/stores/currentTime";
 
     export let data: PageServerData;
 
     $: ({ arrivals, stopName } = data);
-    let currentTime: Date = new Date();
+    $: filteredArrivals = arrivals
+        .filter((a) => a.time > $currentTime || a.isAtStop)
+        .slice(0, pageNum * ARRIVAL_NUM);
+
     let pageNum = 1;
     let noMoreArrivals = false;
     let scrollY: number;
-
-    $: filteredArrivals = arrivals
-        .filter((a) => a.time > currentTime || a.isAtStop)
-        .slice(0, pageNum * ARRIVAL_NUM);
 
     const fetchData = async () => {
         const res = await fetch(
@@ -39,7 +39,7 @@
     onMount(async () => {
         scrollY = 0;
         const fetchInterval = setInterval(fetchData, 5000);
-        const timeInterval = setInterval(() => (currentTime = new Date()), 1000);
+        const timeInterval = setInterval(() => ($currentTime = new Date()), 1000);
 
         return () => {
             clearInterval(timeInterval);
@@ -69,7 +69,7 @@
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {#each filteredArrivals as arrival}
-                    <ArrivalDisplay {arrival} {currentTime} />
+                    <ArrivalDisplay {arrival} />
                 {/each}
             </div>
         {:else}

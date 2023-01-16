@@ -1,12 +1,10 @@
 <script lang="ts">
+    import { currentTime } from "$lib/stores/currentTime";
     import type { Arrival } from "src/interfaces/Arrival";
     import type { DateDifference } from "src/interfaces/DateDifference";
-    import { onMount } from "svelte";
     import { _ } from "svelte-i18n";
 
     export let arrival: Arrival;
-
-    export let currentTime: Date = new Date();
 
     const getDateDiff = (startDate: Date, endDate: Date): DateDifference => {
         const msInSec = 1000;
@@ -59,7 +57,7 @@
         <h3 class="text-lg text-gray-400">{$_("atStop")}</h3>
     {:else}
         <h3 class="text-lg">
-            {getDisplayDiff(currentTime, arrival.time)}
+            {getDisplayDiff($currentTime, arrival.time)}
         </h3>
     {/if}
 </div>
