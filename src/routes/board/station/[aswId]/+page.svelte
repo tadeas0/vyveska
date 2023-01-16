@@ -61,7 +61,7 @@
 <svelte:window on:scroll={handleScroll} bind:scrollY />
 
 <Board>
-    <h1 slot="title" class="text-3xl">{stopName}</h1>
+    <h1 slot="title" class="text-3xl text-teal-400">{stopName}</h1>
     <svelte:fragment slot="items">
         {#each filteredArrivals as arrival}
             <ArrivalDisplay {arrival} />

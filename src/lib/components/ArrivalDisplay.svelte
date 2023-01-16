@@ -18,7 +18,7 @@
     {#if arrival.isAtStop}
         <h3 class="text-lg text-gray-400">{$_("atStop")}</h3>
     {:else}
-        <h3 class="text-lg">
+        <h3 class="text-lg  text-teal-400">
             {getDisplayDiff($currentTime, arrival.time)}
         </h3>
     {/if}

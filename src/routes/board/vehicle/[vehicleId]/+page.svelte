@@ -31,7 +31,7 @@
 </script>
 
 <Board>
-    <h1 slot="title" class="text-3xl">{data.name}</h1>
+    <h1 slot="title" class="text-3xl text-teal-400">{data.name}</h1>
     <svelte:fragment slot="items">
         {#each vehicle.positions as position}
             <div class="py-2">
@@ -41,14 +41,14 @@
                             <StationLink station={position.lastStop} />
                         </h2>
                     {/if}
-                    <div class="w-4">
+                    <div class="w-4  text-teal-400">
                         <FaLongArrowAltRight />
                     </div>
                     <h2 class="text-xl text-emerald-400 ">
                         <StationLink station={position.nextStop} />
                     </h2>
                 </div>
-                <h3 class="text-xl">
+                <h3 class="text-xl text-teal-400">
                     {getDisplayDiff($currentTime, new Date(position.nextArrival))}
                 </h3>
             </div>
