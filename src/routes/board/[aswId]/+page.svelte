@@ -10,8 +10,7 @@
 
     export let data: PageServerData;
 
-    let arrivals = data.arrivals;
-    let stopName = data.stopName;
+    $: ({ arrivals, stopName } = data);
     let currentTime: Date = new Date();
     let pageNum = 1;
     let noMoreArrivals = false;
@@ -69,7 +68,7 @@
                 <h1 class="text-3xl">{stopName}</h1>
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {#each filteredArrivals as arrival (arrival)}
+                {#each filteredArrivals as arrival}
                     <ArrivalDisplay {arrival} {currentTime} />
                 {/each}
             </div>
