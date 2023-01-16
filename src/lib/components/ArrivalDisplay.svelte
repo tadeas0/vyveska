@@ -3,6 +3,7 @@
     import { currentTime } from "$lib/stores/currentTime";
     import type { Arrival } from "src/interfaces/Arrival";
     import { _ } from "svelte-i18n";
+    import StationLink from "./StationLink.svelte";
 
     export let arrival: Arrival;
 </script>
@@ -10,15 +11,9 @@
 <div class="py-2">
     <h2>
         <span class="text-2xl text-cyan-500">{arrival.name}</span>
-        {#if arrival.destination.node}
-            <a
-                href="/board/{arrival.destination.node}"
-                class="ml-2 text-xl text-emerald-400 hover:underline"
-                >{arrival.destination.fullName}</a
-            >
-        {:else}
-            <span class="ml-2 text-xl text-emerald-400">{arrival.destination.fullName}</span>
-        {/if}
+        <span class="ml-2 text-xl text-emerald-400 ">
+            <StationLink station={arrival.destination} />
+        </span>
     </h2>
     {#if arrival.isAtStop}
         <h3 class="text-lg text-gray-400">{$_("atStop")}</h3>
