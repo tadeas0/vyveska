@@ -7,7 +7,7 @@
     import { recentResults } from "$lib/stores/recentResults";
 
     let query: string = "";
-    let selected: number = 0;
+    let selected: number = -1;
     let results: SearchResult[] = $recentResults;
     let inputEl: HTMLInputElement;
 
@@ -16,7 +16,7 @@
             "/api/search?" + new URLSearchParams({ query: query, limit: "20" })
         );
         const data = await res.json();
-        results = data.results;
+        return data.results;
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -30,15 +30,16 @@
         } else if (["f", "/"].includes(event.key) && !event.ctrlKey) {
             event.preventDefault();
             inputEl.focus();
-        } else if (event.key === "Enter" && results.length > 0) {
+        } else if (event.key === "Enter" && results.length > 0 && selected >= 0) {
             recentResults.addResult(results[selected]);
             goto(results[selected].link);
         }
     };
 
-    const handleInput = () => {
-        if (query.length > 0) fetchResults();
+    const handleInput = async () => {
+        if (query.length > 0) results = await fetchResults();
         else results = $recentResults;
+        if (selected > results.length) selected = results.length;
     };
 </script>
 
