@@ -1,4 +1,4 @@
-import type { Station } from "src/interfaces/Station";
+import type { Station } from "$lib/interfaces/Station";
 import stops from "../../data/stops.json";
 
 export const findByName = (name: string): Station | undefined => {

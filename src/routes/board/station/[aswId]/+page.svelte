@@ -6,7 +6,7 @@
     import { page } from "$app/stores";
     import { parseArrival } from "$lib/common/helpers";
     import ArrivalDisplay from "$lib/components/ArrivalDisplay.svelte";
-    import type { Arrival } from "src/interfaces/Arrival";
+    import type { Arrival } from "$lib/interfaces/Arrival";
     import { currentTime } from "$lib/stores/currentTime";
     import Board from "$lib/components/Board.svelte";
 

@@ -1,8 +1,8 @@
 import { API_KEY, API_URL } from "$env/static/private";
 import { findByGtfsId } from "$lib/server/stations";
 import { error, json } from "@sveltejs/kit";
-import type { Station } from "src/interfaces/Station";
-import type { Vehicle } from "src/interfaces/Vehicle";
+import type { Station } from "$lib/interfaces/Station";
+import type { Vehicle } from "$lib/interfaces/Vehicle";
 import type { RequestHandler } from "./$types";
 
 const DEFAULT_LIMIT = 10;

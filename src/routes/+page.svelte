@@ -3,7 +3,7 @@
     import FaSearch from "svelte-icons/fa/FaSearch.svelte";
     import { goto } from "$app/navigation";
     import { _ } from "svelte-i18n";
-    import type { SearchResult } from "src/interfaces/SearchResult";
+    import type { SearchResult } from "$lib/interfaces/SearchResult";
 
     let query: string = "";
     let selected: number = 0;
