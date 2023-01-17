@@ -1,8 +1,10 @@
 {
-    "stopName": "Název stanice...",
+    "stopName": "Název stanice, číslo autobusu, tramvaje...",
     "second": "vteřiny",
     "minute": "minuty",
     "hour": "hodiny",
     "atStop": "Ve stanici",
-    "loading": "Načítání..."
+    "loading": "Načítání...",
+    "now": "Právě teď",
+    "noVehicleData": "Žádná data pro toto vozidlo"
 }

@@ -1,9 +1,10 @@
 {
-    "stopName": "Name of the stop...",
+    "stopName": "Name of the stop, bus, tram...",
     "second": "{count, plural, =0 {# seconds} one {# second} other {# seconds}}",
     "minute": "{count, plural, =0 {# minutes} one {# minute} other {# minutes}}",
     "hour": "{count, plural, =0 {# hours} one {# hour} other {# hours}}",
     "atStop": "At stop",
     "loading": "Loading...",
-    "now": "Now"
+    "now": "Now",
+    "noVehicleData": "No data for this vehicle"
 }
