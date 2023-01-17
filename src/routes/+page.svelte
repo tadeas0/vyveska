@@ -4,10 +4,11 @@
     import { goto } from "$app/navigation";
     import { _ } from "svelte-i18n";
     import type { SearchResult } from "$lib/interfaces/SearchResult";
+    import { recentResults } from "$lib/stores/recentResults";
 
     let query: string = "";
     let selected: number = 0;
-    let results: SearchResult[] = [];
+    let results: SearchResult[] = $recentResults;
     let inputEl: HTMLInputElement;
 
     const fetchResults = async () => {
@@ -30,12 +31,14 @@
             event.preventDefault();
             inputEl.focus();
         } else if (event.key === "Enter" && results.length > 0) {
+            recentResults.addResult(results[selected]);
             goto(results[selected].link);
         }
     };
 
     const handleInput = () => {
         if (query.length > 0) fetchResults();
+        else results = $recentResults;
     };
 </script>
 
@@ -56,31 +59,30 @@
             />
         </div>
         <div class="w-full">
-            {#if query}
-                {#key results}
-                    <ul in:fly={{ y: -5, duration: 400 }}>
-                        {#each results as result, i}
-                            <li class="border-b-2 border-gray-700">
-                                <a
-                                    class="inline-block h-full w-full p-3 text-gray-300 hover:bg-gray-800 hover:underline focus:underline md:p-4"
-                                    class:bg-gray-800={i === selected}
-                                    class:underline={i === selected}
-                                    href={result.link}
-                                >
-                                    <div class="flex flex-row gap-6">
-                                        <h1 class="md:text-xl">{result.name}</h1>
-                                        {#if result.altName}
-                                            <h1 class="md:text-md text-gray-400">
-                                                {result.altName}
-                                            </h1>
-                                        {/if}
-                                    </div>
-                                </a>
-                            </li>
-                        {/each}
-                    </ul>
-                {/key}
-            {/if}
+            {#key results}
+                <ul in:fly={{ y: -5, duration: 400 }}>
+                    {#each results as result, i}
+                        <li class="border-b-2 border-gray-700">
+                            <a
+                                class="inline-block h-full w-full p-3 text-gray-300 hover:bg-gray-800 hover:underline focus:underline md:p-4"
+                                class:bg-gray-800={i === selected}
+                                class:underline={i === selected}
+                                on:click={() => recentResults.addResult(result)}
+                                href={result.link}
+                            >
+                                <div class="flex flex-row gap-6">
+                                    <h1 class="md:text-xl">{result.name}</h1>
+                                    {#if result.altName}
+                                        <h1 class="md:text-md text-gray-400">
+                                            {result.altName}
+                                        </h1>
+                                    {/if}
+                                </div>
+                            </a>
+                        </li>
+                    {/each}
+                </ul>
+            {/key}
         </div>
     </div>
 </div>
