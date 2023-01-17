@@ -23,7 +23,7 @@
 
     const fetchData = async () => {
         const res = await fetch(
-            `/api/departure/${$page.params.aswId}?limit=${pageNum * (ARRIVAL_NUM + 5)}`
+            `/api/station/${$page.params.aswId}?limit=${pageNum * (ARRIVAL_NUM + 5)}`
         );
         const data = await res.json();
         const parsedArrivals: Arrival[] = data.arrivals.map(parseArrival);
