@@ -6,7 +6,7 @@ import type { ArrivalSerialized } from "src/interfaces/ArrivalSerialized";
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
     const res = await fetch(
-        `/api/departure/${params.aswId}?` +
+        `/api/station/${params.aswId}?` +
             new URLSearchParams({ limit: (ARRIVAL_NUM * 2).toString() })
     );
     const { stopName, arrivals } = await res.json();

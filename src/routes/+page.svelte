@@ -1,62 +1,41 @@
 <script lang="ts">
-    import type { Station } from "src/interfaces/Station";
     import { fly } from "svelte/transition";
     import FaSearch from "svelte-icons/fa/FaSearch.svelte";
     import { goto } from "$app/navigation";
     import { _ } from "svelte-i18n";
+    import type { SearchResult } from "src/interfaces/SearchResult";
 
-    let stationName: string = "";
+    let query: string = "";
     let selected: number = 0;
-    let stations: Station[] = [];
-    let vehicles: { longName: string; name: string }[] = [];
+    let results: SearchResult[] = [];
     let inputEl: HTMLInputElement;
 
-    $: items = [
-        ...stations.map((s) => ({ name: s.fullName, link: `/board/station/${s.node}` })),
-        ...vehicles.map((v) => ({
-            name: v.name,
-            longName: v.longName,
-            link: `/board/vehicle/${v.name}`
-        }))
-    ] as { name: string; link: string; longName?: string }[];
-
-    async function getStations() {
+    const fetchResults = async () => {
         const res = await fetch(
-            "/api/station?" + new URLSearchParams({ stationName, limit: "20" }),
-            {
-                method: "GET"
-            }
+            "/api/search?" + new URLSearchParams({ query: query, limit: "20" })
         );
         const data = await res.json();
-        stations = data.stations;
-    }
-
-    async function getVehicles() {
-        const res = await fetch(
-            "/api/vehicle?" + new URLSearchParams({ vehicleName: stationName, limit: "20" })
-        );
-        const data = await res.json();
-        vehicles = data.vehicles;
-    }
+        results = data.results;
+    };
 
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === "ArrowDown") {
             event.preventDefault();
-            selected = (selected + 1) % items.length;
+            selected = (selected + 1) % results.length;
         } else if (event.key === "ArrowUp") {
             event.preventDefault();
-            if (selected === 0) selected = items.length - 1;
+            if (selected === 0) selected = results.length - 1;
             else selected = selected - 1;
         } else if (["f", "/"].includes(event.key) && !event.ctrlKey) {
             event.preventDefault();
             inputEl.focus();
-        } else if (event.key === "Enter" && items.length > 0) {
-            goto(items[selected].link);
+        } else if (event.key === "Enter" && results.length > 0) {
+            goto(results[selected].link);
         }
     };
 
-    const handleInput = async () => {
-        if (stationName.length > 0) await Promise.all([getStations(), getVehicles()]);
+    const handleInput = () => {
+        if (query.length > 0) fetchResults();
     };
 </script>
 
@@ -69,7 +48,7 @@
                 <FaSearch />
             </div>
             <input
-                bind:value={stationName}
+                bind:value={query}
                 on:input={handleInput}
                 bind:this={inputEl}
                 placeholder={$_("stopName")}
@@ -77,22 +56,22 @@
             />
         </div>
         <div class="w-full">
-            {#if stationName}
-                {#key stations}
+            {#if query}
+                {#key results}
                     <ul in:fly={{ y: -5, duration: 400 }}>
-                        {#each items as item, i}
+                        {#each results as result, i}
                             <li class="border-b-2 border-gray-700">
                                 <a
                                     class="inline-block h-full w-full p-3 text-gray-300 hover:bg-gray-800 hover:underline focus:underline md:p-4"
                                     class:bg-gray-800={i === selected}
                                     class:underline={i === selected}
-                                    href={item.link}
+                                    href={result.link}
                                 >
                                     <div class="flex flex-row gap-6">
-                                        <h1 class="md:text-xl">{item.name}</h1>
-                                        {#if item.longName}
+                                        <h1 class="md:text-xl">{result.name}</h1>
+                                        {#if result.altName}
                                             <h1 class="md:text-md text-gray-400">
-                                                {item.longName}
+                                                {result.altName}
                                             </h1>
                                         {/if}
                                     </div>
