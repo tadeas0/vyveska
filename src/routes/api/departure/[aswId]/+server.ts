@@ -2,7 +2,7 @@ import type { RequestHandler } from "./$types";
 import { json } from "@sveltejs/kit";
 import { API_KEY, API_URL } from "$env/static/private";
 import type { Arrival } from "src/interfaces/Arrival";
-import stops from "../../../../stops.json";
+import stops from "../../../../data/stops.json";
 
 const DEFAULT_LIMIT = 10;
 

@@ -1,19 +1,11 @@
 import { error, json } from "@sveltejs/kit";
 import type { Station } from "src/interfaces/Station";
 import type { RequestHandler } from "./$types";
-import data from "../../../stops.json";
+import data from "../../../data/stops.json";
+import { prepName } from "$lib/server/stringUtils";
 
 const DEFAULT_LIMIT = 10;
 const DEFAULT_SKIP = 0;
-
-const prepName = (stationName: string): string => {
-    return stationName
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/\p{Diacritic}/gu, "") // replace diacritic
-        .replace(/[\W_]+/g, " ") // replace nonaplhanumeric
-        .replace(/\s\s+/g, " "); // replace multiple whitespace chars
-};
 
 export const GET: RequestHandler = async ({ url }) => {
     const stationName = url.searchParams.get("stationName");
