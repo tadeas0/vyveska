@@ -73,7 +73,7 @@
                 on:input={handleInput}
                 bind:this={inputEl}
                 placeholder={$_("stopName")}
-                class="w-full bg-transparent text-xl font-semibold text-gray-300 outline-none placeholder:text-gray-600 md:text-4xl"
+                class="w-full bg-transparent text-xl font-semibold text-gray-300 outline-none placeholder:text-ellipsis placeholder:text-gray-600 md:text-4xl"
             />
         </div>
         <div class="w-full">
