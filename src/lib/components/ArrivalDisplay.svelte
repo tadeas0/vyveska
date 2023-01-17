@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getDisplayDiff } from "$lib/common/dateUtils";
     import { currentTime } from "$lib/stores/currentTime";
-    import type { Arrival } from "src/interfaces/Arrival";
+    import type { Arrival } from "$lib/interfaces/Arrival";
     import { _ } from "svelte-i18n";
     import StationLink from "./StationLink.svelte";
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Station } from "src/interfaces/Station";
+    import type { Station } from "$lib/interfaces/Station";
 
     export let station: Station;
 </script>

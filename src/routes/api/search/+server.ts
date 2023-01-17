@@ -3,7 +3,7 @@ import type { RequestHandler } from "./$types";
 import routes from "../../../data/routes.json";
 import stops from "../../../data/stops.json";
 import { prepName } from "$lib/server/stringUtils";
-import type { SearchResult } from "src/interfaces/SearchResult";
+import type { SearchResult } from "$lib/interfaces/SearchResult";
 
 const DEFAULT_LIMIT = 10;
 

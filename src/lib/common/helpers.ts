@@ -1,7 +1,7 @@
-import type { Arrival } from "src/interfaces/Arrival";
-import type { ArrivalSerialized } from "src/interfaces/ArrivalSerialized";
-import type { Vehicle } from "src/interfaces/Vehicle";
-import type { VehicleSerialized } from "src/interfaces/VehicleSerialized";
+import type { Arrival } from "$lib/interfaces/Arrival";
+import type { ArrivalSerialized } from "$lib/interfaces/ArrivalSerialized";
+import type { Vehicle } from "$lib/interfaces/Vehicle";
+import type { VehicleSerialized } from "$lib/interfaces/VehicleSerialized";
 
 export const parseArrival = (arrivalJson: ArrivalSerialized): Arrival => ({
     destination: arrivalJson.destination,

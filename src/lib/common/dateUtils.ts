@@ -1,4 +1,4 @@
-import type { DateDifference } from "src/interfaces/DateDifference";
+import type { DateDifference } from "$lib/interfaces/DateDifference";
 import { _ } from "svelte-i18n";
 import { get } from "svelte/store";
 

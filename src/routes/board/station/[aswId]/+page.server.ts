@@ -1,8 +1,8 @@
 import type { PageServerLoad } from "./$types";
-import type { Arrival } from "src/interfaces/Arrival";
+import type { Arrival } from "$lib/interfaces/Arrival";
 import { ARRIVAL_NUM } from "$lib/constants";
 import { parseArrival } from "$lib/common/helpers";
-import type { ArrivalSerialized } from "src/interfaces/ArrivalSerialized";
+import type { ArrivalSerialized } from "$lib/interfaces/ArrivalSerialized";
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
     const res = await fetch(

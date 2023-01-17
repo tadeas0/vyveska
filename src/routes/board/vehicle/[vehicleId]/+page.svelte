@@ -6,7 +6,7 @@
     import StationLink from "$lib/components/StationLink.svelte";
     import { VEHICLE_NUM } from "$lib/constants";
     import { currentTime } from "$lib/stores/currentTime";
-    import type { Vehicle } from "src/interfaces/Vehicle";
+    import type { Vehicle } from "$lib/interfaces/Vehicle";
     import { onMount } from "svelte";
     import FaLongArrowAltRight from "svelte-icons/fa/FaLongArrowAltRight.svelte";
 
