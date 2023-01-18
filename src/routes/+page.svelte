@@ -43,6 +43,10 @@
     };
 </script>
 
+<svelte:head>
+    <title>{$_("homeTitle")}</title>
+</svelte:head>
+
 <svelte:body on:keydown={handleKeyDown} />
 
 <div class="flex flex-col items-center px-6">

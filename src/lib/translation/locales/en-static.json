@@ -6,5 +6,8 @@
     "atStop": "At stop",
     "loading": "Loading...",
     "now": "Now",
-    "noVehicleData": "No data for this vehicle"
+    "noVehicleData": "No data for this vehicle",
+    "homeTitle": "Vyveska - Bus, tram, metro timetable search",
+    "stationTitle": "Station {station} - Departures",
+    "vehicleTitle": "{vehicle} - Current positions"
 }
