@@ -45,6 +45,7 @@
 
 <svelte:head>
     <title>{$_("homeTitle")}</title>
+    <meta name="description" content={$_("homeDescription")} />
 </svelte:head>
 
 <svelte:body on:keydown={handleKeyDown} />

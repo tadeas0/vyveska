@@ -9,5 +9,8 @@
     "noVehicleData": "No data for this vehicle",
     "homeTitle": "Vyveska - Bus, tram, metro timetable search",
     "stationTitle": "Station {station} - Departures",
-    "vehicleTitle": "{vehicle} - Current positions"
+    "vehicleTitle": "{vehicle} - Current positions",
+    "homeDescription": "Vyveska allows you to search for arrivals of buses, trams and metro. It allows you to view the locations of vehicles.",
+    "stationDescription": "Timetable showing departures from station {station}",
+    "vehicleDescription": "List of positions of vehicles {vehicle}"
 }

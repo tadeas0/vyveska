@@ -33,6 +33,10 @@
 
 <svelte:head>
     <title>{$_("vehicleTitle", { values: { vehicle: vehicle.name } })}</title>
+    <meta
+        name="description"
+        content={$_("vehicleDescription", { values: { vehicle: vehicle.name } })}
+    />
 </svelte:head>
 
 <Board>

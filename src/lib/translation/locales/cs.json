@@ -9,5 +9,8 @@
     "noVehicleData": "Žádná data pro toto vozidlo",
     "homeTitle": "Vývěska - Vyhledávání příjezdů autobusů, tramvají, metra",
     "stationTitle": "Stanice {station} - Odjezdy",
-    "vehicleTitle": "{vehicle} - Současné pozice"
+    "vehicleTitle": "{vehicle} - Současné pozice",
+    "homeDescription": "Vývěska umožňuje vyhledávat příjezdy autobusů, tramvají a metra. Umožňuje zobrazit polohy jednotlivých dopravních prostředků.",
+    "stationDescription": "Seznam odjezdů autobusů, tramvají a metra ze stanice {station}",
+    "vehicleDescription": "Seznam pozic jednotlivých vozidel {vehicle}"
 }
