@@ -5,11 +5,13 @@
     import { _ } from "svelte-i18n";
     import type { SearchResult } from "$lib/interfaces/SearchResult";
     import { recentResults } from "$lib/stores/recentResults";
+    import Title from "$lib/components/Title.svelte";
 
     let query: string = "";
     let selected: number = -1;
     let results: SearchResult[] = $recentResults;
     let inputEl: HTMLInputElement;
+    let titleHidden: boolean = false;
 
     const fetchResults = async () => {
         const res = await fetch(
@@ -43,10 +45,18 @@
     };
 </script>
 
+<svelte:head>
+    <title>{$_("homeTitle")}</title>
+    <meta name="description" content={$_("homeDescription")} />
+</svelte:head>
+
 <svelte:body on:keydown={handleKeyDown} />
 
 <div class="flex flex-col items-center px-6">
     <div class="w-full md:w-4/5">
+        {#if !titleHidden}
+            <Title animate />
+        {/if}
         <div class="flex w-full flex-row items-center border-b-2 border-gray-500 p-2 md:p-4">
             <div class="mr-4 w-4 text-gray-500 md:mr-6 md:w-7">
                 <FaSearch />
@@ -54,6 +64,10 @@
             <input
                 bind:value={query}
                 on:input={handleInput}
+                on:focus={() => (titleHidden = true)}
+                on:blur={() => {
+                    if (query.length === 0) titleHidden = false;
+                }}
                 bind:this={inputEl}
                 placeholder={$_("stopName")}
                 class="w-full bg-transparent text-xl font-semibold text-gray-300 outline-none placeholder:text-ellipsis placeholder:text-gray-600 md:text-4xl"
