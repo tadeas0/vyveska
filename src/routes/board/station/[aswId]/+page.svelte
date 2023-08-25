@@ -58,6 +58,14 @@
     };
 </script>
 
+<svelte:head>
+    <title>{$_("stationTitle", { values: { station: stopName } })}</title>
+    <meta
+        name="description"
+        content={$_("stationDescription", { values: { station: stopName } })}
+    />
+</svelte:head>
+
 <svelte:window on:scroll={handleScroll} bind:scrollY />
 
 <Board>

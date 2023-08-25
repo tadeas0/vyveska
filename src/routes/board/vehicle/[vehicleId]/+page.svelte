@@ -9,6 +9,7 @@
     import type { Vehicle } from "$lib/interfaces/Vehicle";
     import { onMount } from "svelte";
     import FaLongArrowAltRight from "svelte-icons/fa/FaLongArrowAltRight.svelte";
+    import { _ } from "svelte-i18n";
 
     export let data: Vehicle;
 
@@ -29,6 +30,14 @@
         };
     });
 </script>
+
+<svelte:head>
+    <title>{$_("vehicleTitle", { values: { vehicle: vehicle.name } })}</title>
+    <meta
+        name="description"
+        content={$_("vehicleDescription", { values: { vehicle: vehicle.name } })}
+    />
+</svelte:head>
 
 <Board>
     <h1 slot="title" class="text-3xl text-teal-400">{data.name}</h1>
