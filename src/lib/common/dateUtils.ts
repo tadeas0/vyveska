@@ -38,3 +38,7 @@ export const getDisplayDiff = (startDate: Date, endDate: Date): string => {
         return $_("now");
     }
 };
+
+export const getFormattedTime = (date: Date) => {
+    return `${date.getHours()}:${date.getMinutes()}`;
+};
