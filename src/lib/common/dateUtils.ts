@@ -40,5 +40,7 @@ export const getDisplayDiff = (startDate: Date, endDate: Date): string => {
 };
 
 export const getFormattedTime = (date: Date) => {
-    return `${date.getHours()}:${date.getMinutes()}`;
+    const m = ("0" + date.getMinutes()).slice(-2);
+    const h = ("0" + date.getHours()).slice(-2);
+    return `${h}:${m}`;
 };
