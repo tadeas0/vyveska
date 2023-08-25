@@ -75,7 +75,7 @@
         </div>
         <div class="w-full">
             {#key results}
-                <ul in:fly={{ y: -5, duration: 400 }}>
+                <ul in:fly|global={{ y: -5, duration: 400 }}>
                     {#each results as result, i}
                         <li class="border-b-2 border-gray-700">
                             <a
