@@ -64,7 +64,7 @@
     <h1 slot="title" class="text-3xl text-teal-400">{stopName}</h1>
     <svelte:fragment slot="items">
         {#each filteredArrivals as arrival}
-            <ArrivalDisplay {arrival} />
+            <ArrivalDisplay {arrival} currentStation={stopName} />
         {/each}
     </svelte:fragment>
 </Board>

@@ -5,5 +5,6 @@ export interface ArrivalSerialized {
     time: string;
     destination: Station;
     isAtStop: boolean;
+    tripId: string;
     node?: number;
 }

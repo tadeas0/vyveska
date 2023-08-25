@@ -40,7 +40,8 @@ export const GET: RequestHandler = async ({ url, params }) => {
             fullName: d.trip.headsign,
             names: []
         },
-        isAtStop: d.trip.is_at_stop
+        isAtStop: d.trip.is_at_stop,
+        tripId: d.trip.id
     }));
 
     arrivals.forEach((a) => {

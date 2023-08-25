@@ -5,4 +5,5 @@ export interface Arrival {
     time: Date;
     destination: Station;
     isAtStop: boolean;
+    tripId: string;
 }
