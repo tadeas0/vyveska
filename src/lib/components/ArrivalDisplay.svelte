@@ -8,6 +8,7 @@
     import MdSubdirectoryArrowRight from "svelte-icons/md/MdSubdirectoryArrowRight.svelte";
     import { parseTrip } from "$lib/common/helpers";
     import type { Trip } from "$lib/interfaces/Trip";
+    import { fly, slide } from "svelte/transition";
 
     export let arrival: Arrival;
     export let currentStation: string = "";
@@ -39,9 +40,9 @@
 </script>
 
 <div class="py-2">
-    <button class="flex w-full items-end gap-2" on:click={handleShowMore}>
-        <h1 class="text-2xl text-cyan-500 hover:underline">{arrival.name}</h1>
-        <span class="text-xl text-emerald-400 ">
+    <button class="flex w-full items-end" on:click={handleShowMore}>
+        <h1 class="text-xl text-cyan-500 hover:underline">{arrival.name}</h1>
+        <span class="ml-2 text-left text-lg text-emerald-400">
             {arrival.destination.fullName}
         </span>
         <div class="w-8 text-white">
@@ -59,7 +60,7 @@
         </h3>
     {/if}
     {#if isDropdownOpen && trip !== null}
-        <ul class="rounded-lg bg-slate-800 p-2">
+        <ul transition:slide={{ duration: 200 }} class="rounded-lg bg-slate-800 p-2">
             {#each trip.stopTimes as st}
                 <li class="flex rounded-md text-lg text-white">
                     <div class="w-5 self-center text-gray-400"><MdSubdirectoryArrowRight /></div>
