@@ -22,7 +22,8 @@ export const GET: RequestHandler = async ({ url }) => {
         })
         .map((s) => ({
             name: s.fullName,
-            link: `/board/station/${s.node}`
+            link: `/board/station/${s.node}`,
+            altName: [...new Set(s.lines.map((l) => l.name))].join(", ")
         }));
     const routeRes: SearchResult[] = routes.routes
         .filter((r) => r.name.includes(queryPrep))

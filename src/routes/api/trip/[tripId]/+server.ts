@@ -14,7 +14,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
             includeStops: "true",
             includeStopTimes: "true",
             includeRoute: "true",
-            date: "2023-08-25"
+            date: new Date().toISOString().split("T")[0]
         });
     const res = await fetch(reqUrl, {
         headers: {

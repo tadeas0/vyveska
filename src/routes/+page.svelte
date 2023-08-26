@@ -85,10 +85,10 @@
                                 on:click={() => recentResults.addResult(result)}
                                 href={result.link}
                             >
-                                <div class="flex flex-row gap-6">
-                                    <h1 class="md:text-xl">{result.name}</h1>
+                                <div class="flex flex-row">
+                                    <h1 class="md:text-xl w-3/5">{result.name}</h1>
                                     {#if result.altName}
-                                        <h1 class="md:text-md text-gray-400">
+                                        <h1 class="md:text-md whitespace-nowrap w-2/5 overflow-ellipsis overflow-hidden text-gray-400">
                                             {result.altName}
                                         </h1>
                                     {/if}
