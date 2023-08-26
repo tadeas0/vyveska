@@ -12,5 +12,7 @@
     "vehicleTitle": "{vehicle} - Current positions",
     "homeDescription": "Vyveska allows you to search for arrivals of buses, trams and metro. It allows you to view the locations of vehicles.",
     "stationDescription": "Timetable showing departures from station {station}",
-    "vehicleDescription": "List of positions of vehicles {vehicle}"
+    "vehicleDescription": "List of positions of vehicles {vehicle}",
+    "loadingMoreArrivals": "Loading more arrivals",
+    "noMoreArrivals": "No more arrivals currently available"
 }

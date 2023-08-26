@@ -12,5 +12,7 @@
     "vehicleTitle": "{vehicle} - Současné pozice",
     "homeDescription": "Vývěska umožňuje vyhledávat příjezdy autobusů, tramvají a metra. Umožňuje zobrazit polohy jednotlivých dopravních prostředků.",
     "stationDescription": "Seznam odjezdů autobusů, tramvají a metra ze stanice {station}",
-    "vehicleDescription": "Seznam pozic jednotlivých vozidel {vehicle}"
+    "vehicleDescription": "Seznam pozic jednotlivých vozidel {vehicle}",
+    "loadingMoreArrivals": "Načítám další příjezdy",
+    "noMoreArrivals": "Další příjezdy nyní nejsou dostupné"
 }

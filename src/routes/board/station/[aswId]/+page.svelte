@@ -9,6 +9,7 @@
     import type { Arrival } from "$lib/interfaces/Arrival";
     import { currentTime } from "$lib/stores/currentTime";
     import Board from "$lib/components/Board.svelte";
+    import MdAccessTime from "svelte-icons/md/MdAccessTime.svelte";
 
     export let data: PageServerData;
 
@@ -20,6 +21,7 @@
     let pageNum = 1;
     let noMoreArrivals = false;
     let scrollY: number;
+    let isLoadingMore = false;
 
     const fetchData = async () => {
         const res = await fetch(
@@ -38,7 +40,6 @@
     };
 
     onMount(() => {
-        scrollY = 0;
         const fetchInterval = setInterval(fetchData, 5000);
 
         return () => {
@@ -46,14 +47,15 @@
         };
     });
 
-    const handleScroll = async () => {
-        if (noMoreArrivals) return;
+    const handleScroll = async (e: Event) => {
+        if (isLoadingMore || noMoreArrivals) return;
+        const threshold = 50;
 
-        const offset = 50;
-
-        if (window.innerHeight + scrollY > document.body.offsetHeight - offset) {
+        if (window.innerHeight + window.scrollY > document.body.offsetHeight - threshold) {
             pageNum += 1;
+            isLoadingMore = true;
             await fetchData();
+            isLoadingMore = false;
         }
     };
 </script>
@@ -66,7 +68,7 @@
     />
 </svelte:head>
 
-<svelte:window on:scroll={handleScroll} bind:scrollY />
+<svelte:window on:scroll={(e) => handleScroll(e)} />
 
 <Board>
     <h1 slot="title" class="text-3xl text-teal-400">{stopName}</h1>
@@ -76,3 +78,15 @@
         {/each}
     </svelte:fragment>
 </Board>
+{#if noMoreArrivals}
+    <div class="my-4 flex w-full items-center justify-center text-teal-400">
+        {$_("noMoreArrivals")}
+    </div>
+{:else}
+    <div class="my-4 flex w-full animate-pulse items-center justify-center text-teal-200">
+        <div class="mr-2 h-6">
+            <MdAccessTime />
+        </div>
+        <div class="text-lg">{$_("loadingMoreArrivals")}</div>
+    </div>
+{/if}
