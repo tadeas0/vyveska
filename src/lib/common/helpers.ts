@@ -4,13 +4,15 @@ import type { Trip } from "$lib/interfaces/Trip";
 import type { TripSerialized } from "$lib/interfaces/TripSerialized";
 import type { Vehicle } from "$lib/interfaces/Vehicle";
 import type { VehicleSerialized } from "$lib/interfaces/VehicleSerialized";
+import { VehicleType } from "$lib/interfaces/VehicleType";
 
 export const parseArrival = (arrivalJson: ArrivalSerialized): Arrival => ({
     destination: arrivalJson.destination,
     isAtStop: arrivalJson.isAtStop,
     name: arrivalJson.name,
     time: new Date(arrivalJson.time),
-    tripId: arrivalJson.tripId
+    tripId: arrivalJson.tripId,
+    vehicleType: arrivalJson.vehicleType
 });
 
 export const parseVehicle = (vehicleJson: VehicleSerialized): Vehicle => ({

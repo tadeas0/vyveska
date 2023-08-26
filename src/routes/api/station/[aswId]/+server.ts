@@ -33,16 +33,19 @@ export const GET: RequestHandler = async ({ url, params }) => {
 
     const data = await res.json();
     const stopName: string = data.stops[0].stop_name;
-    const arrivals: Arrival[] = data.departures.map((d: any) => ({
-        name: d.route.short_name,
-        time: new Date(d.arrival_timestamp.predicted),
-        destination: {
-            fullName: d.trip.headsign,
-            names: []
-        },
-        isAtStop: d.trip.is_at_stop,
-        tripId: d.trip.id
-    }));
+    const arrivals: Arrival[] = data.departures.map(
+        (d: any): Arrival => ({
+            name: d.route.short_name,
+            time: new Date(d.arrival_timestamp.predicted),
+            destination: {
+                fullName: d.trip.headsign,
+                names: []
+            },
+            isAtStop: d.trip.is_at_stop,
+            tripId: d.trip.id,
+            vehicleType: d.route.type
+        })
+    );
 
     arrivals.forEach((a) => {
         const n = stops.nodes.find((n) => n.names.includes(a.destination.fullName));

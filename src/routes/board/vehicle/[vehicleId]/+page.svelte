@@ -22,7 +22,7 @@
         vehicle = parsedVehicle;
     };
 
-    onMount(async () => {
+    onMount(() => {
         const fetchInterval = setInterval(fetchData, 5000);
 
         return () => {
