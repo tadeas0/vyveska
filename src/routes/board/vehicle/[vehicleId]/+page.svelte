@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores";
-    import { getDisplayDiff } from "$lib/common/dateUtils";
-    import { parseVehicle } from "$lib/common/helpers";
+    import { getDisplayDiff, getFormattedTime } from "$lib/common/dateUtils";
+    import { getVehicleIcon, parseVehicle } from "$lib/common/helpers";
     import Board from "$lib/components/Board.svelte";
     import StationLink from "$lib/components/StationLink.svelte";
     import { VEHICLE_NUM } from "$lib/constants";
@@ -10,10 +10,15 @@
     import { onMount } from "svelte";
     import FaLongArrowAltRight from "svelte-icons/fa/FaLongArrowAltRight.svelte";
     import { _ } from "svelte-i18n";
+    import ArrivalCard from "$lib/components/ArrivalCard.svelte";
+    import MdDirectionsBus from "svelte-icons/md/MdDirectionsBus.svelte";
 
     export let data: Vehicle;
 
+    let vehicleIcon = MdDirectionsBus;
+
     $: vehicle = data;
+    $: vehicleIcon = getVehicleIcon(vehicle.type);
 
     const fetchData = async () => {
         const res = await fetch(`/api/vehicle/${$page.params.vehicleId}?limit=${VEHICLE_NUM}`);
@@ -40,27 +45,35 @@
 </svelte:head>
 
 <Board>
-    <h1 slot="title" class="text-3xl text-teal-400">{data.name}</h1>
+    <div slot="title" class="flex text-3xl text-teal-400">
+        <div class="mr-2 w-9"><svelte:component this={vehicleIcon} /></div>
+        <span>{data.name}</span>
+    </div>
     <svelte:fragment slot="items">
         {#each vehicle.positions as position}
-            <div class="py-2">
-                <div class="flex flex-row items-center gap-2">
+            <ArrivalCard>
+                <div slot="title" class="flex">
                     {#if position.lastStop}
-                        <h2 class="hidden text-xl text-emerald-400 md:flex">
+                        <h2 class="mr-2 hidden text-lg text-emerald-400 md:flex">
                             <StationLink station={position.lastStop} />
                         </h2>
                     {/if}
-                    <div class="w-4 text-teal-400">
+                    <div class="mr-2 w-4 self-center text-teal-400">
                         <FaLongArrowAltRight />
                     </div>
-                    <h2 class="text-xl text-emerald-400">
+                    <h2 class="text-lg text-emerald-400">
                         <StationLink station={position.nextStop} />
                     </h2>
                 </div>
-                <h3 class="text-xl text-teal-400">
+
+                <div slot="right-title" class="px-2 text-cyan-300">
+                    {getFormattedTime(position.nextArrival)}
+                </div>
+
+                <div slot="secondary-title" class="text-md text-teal-400">
                     {getDisplayDiff($currentTime, new Date(position.nextArrival))}
-                </h3>
-            </div>
+                </div>
+            </ArrivalCard>
         {/each}
     </svelte:fragment>
 </Board>

@@ -7,14 +7,9 @@
     import MdArrowDropUp from "svelte-icons/md/MdArrowDropUp.svelte";
     import MdDirectionsBus from "svelte-icons/md/MdDirectionsBus.svelte";
     import MdSubdirectoryArrowRight from "svelte-icons/md/MdSubdirectoryArrowRight.svelte";
-    import MdDirectionsSubway from "svelte-icons/md/MdDirectionsSubway.svelte";
-    import MdTram from "svelte-icons/md/MdTram.svelte";
-    import MdTrain from "svelte-icons/md/MdTrain.svelte";
-    import MdDirectionsBoat from "svelte-icons/md/MdDirectionsBoat.svelte";
-    import { parseTrip } from "$lib/common/helpers";
+    import { getVehicleIcon, parseTrip } from "$lib/common/helpers";
     import type { Trip } from "$lib/interfaces/Trip";
     import { slide } from "svelte/transition";
-    import { VehicleType } from "$lib/interfaces/VehicleType";
     import ArrivalCard from "./ArrivalCard.svelte";
     import MdAccessTime from "svelte-icons/md/MdAccessTime.svelte";
     import { cubicOut } from "svelte/easing";
@@ -47,38 +42,13 @@
     };
 
     $: dropdownIcon = isDropdownOpen ? MdArrowDropUp : MdArrowDropDown;
-    $: switch (arrival.vehicleType) {
-        case VehicleType.Bus:
-            vehicleIcon = MdDirectionsBus;
-            break;
-        case VehicleType.Tram:
-            vehicleIcon = MdTram;
-            break;
-        case VehicleType.Metro:
-            vehicleIcon = MdDirectionsSubway;
-            break;
-        case VehicleType.Train:
-            vehicleIcon = MdTrain;
-            break;
-        case VehicleType.Ferry:
-            vehicleIcon = MdDirectionsBoat;
-            break;
-        case VehicleType.Funicular:
-            vehicleIcon = MdTram;
-            break;
-        case VehicleType.Trolleybus:
-            vehicleIcon = MdDirectionsBus;
-            break;
-        default:
-            vehicleIcon = MdDirectionsBus;
-            break;
-    }
+    $: vehicleIcon = getVehicleIcon(arrival.vehicleType);
 </script>
 
 <div>
     <ArrivalCard on:dropdownClick={handleShowMore} {isDropdownOpen}>
         <div slot="title" class="flex">
-            <div class="mr-2 w-5 self-center text-cyan-400">
+            <div class="mr-2 w-6 text-cyan-400">
                 <svelte:component this={vehicleIcon} />
             </div>
             <h1>
