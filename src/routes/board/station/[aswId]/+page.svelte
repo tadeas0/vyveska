@@ -37,7 +37,7 @@
         stopName = data.stopName;
     };
 
-    onMount(async () => {
+    onMount(() => {
         scrollY = 0;
         const fetchInterval = setInterval(fetchData, 5000);
 
