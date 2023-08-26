@@ -70,7 +70,7 @@
                     {getFormattedTime(position.nextArrival)}
                 </div>
 
-                <div slot="secondary-title" class="text-md text-teal-400">
+                <div slot="secondary-title" class="text-base text-teal-400">
                     {getDisplayDiff($currentTime, new Date(position.nextArrival))}
                 </div>
             </ArrivalCard>
