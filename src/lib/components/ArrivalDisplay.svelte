@@ -8,7 +8,7 @@
     import MdSubdirectoryArrowRight from "svelte-icons/md/MdSubdirectoryArrowRight.svelte";
     import { parseTrip } from "$lib/common/helpers";
     import type { Trip } from "$lib/interfaces/Trip";
-    import { fly, slide } from "svelte/transition";
+    import { slide } from "svelte/transition";
 
     export let arrival: Arrival;
     export let currentStation: string = "";
