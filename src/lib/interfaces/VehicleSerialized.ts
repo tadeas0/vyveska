@@ -2,7 +2,7 @@ import type { Station } from "./Station";
 
 export interface VehicleSerialized {
     name: string;
-    type: string;
+    type: number;
     positions: {
         lastStop?: Station;
         nextStop: Station;

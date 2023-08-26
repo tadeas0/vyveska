@@ -3,7 +3,7 @@
         <div class="mb-4 border-b-2 border-gray-500 py-4">
             <slot name="title" />
         </div>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <slot name="items" />
         </div>
     </div>

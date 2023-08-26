@@ -4,6 +4,7 @@ import { error, json } from "@sveltejs/kit";
 import type { Station } from "$lib/interfaces/Station";
 import type { Vehicle } from "$lib/interfaces/Vehicle";
 import type { RequestHandler } from "./$types";
+import type { VehicleType } from "$lib/interfaces/VehicleType";
 
 const DEFAULT_LIMIT = 10;
 
@@ -33,7 +34,7 @@ export const GET: RequestHandler = async ({ url, params, fetch }) => {
     }
 
     const vehicleName: string = data.features[0].properties.trip.origin_route_name;
-    const vehicleType: string = data.features[0].properties.trip.vehicle_type.description_en;
+    const vehicleType: VehicleType = data.features[0].properties.trip.vehicle_type.id;
     const positions = data.features.map((p: any) => {
         const lastId: string | null = p.properties.last_position.last_stop.id;
         const nextId: string = p.properties.last_position.next_stop.id;

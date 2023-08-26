@@ -4,7 +4,7 @@
     "minute": "{count, plural, =0 {# minut} one {# minuta} few {# minuty} other {# minut}}",
     "hour": "{count, plural, =0 {# hodin} one {# hodina} few {# hodiny} other {# hodin}}",
     "atStop": "Ve stanici",
-    "loading": "Načítání...",
+    "loading": "Načítání",
     "now": "Právě teď",
     "noVehicleData": "Žádná data pro toto vozidlo",
     "homeTitle": "Vývěska - Vyhledávání příjezdů autobusů, tramvají, metra",
@@ -12,5 +12,7 @@
     "vehicleTitle": "{vehicle} - Současné pozice",
     "homeDescription": "Vývěska umožňuje vyhledávat příjezdy autobusů, tramvají a metra. Umožňuje zobrazit polohy jednotlivých dopravních prostředků.",
     "stationDescription": "Seznam odjezdů autobusů, tramvají a metra ze stanice {station}",
-    "vehicleDescription": "Seznam pozic jednotlivých vozidel {vehicle}"
+    "vehicleDescription": "Seznam pozic jednotlivých vozidel {vehicle}",
+    "loadingMoreArrivals": "Načítám další příjezdy",
+    "noMoreArrivals": "Další příjezdy nyní nejsou dostupné"
 }

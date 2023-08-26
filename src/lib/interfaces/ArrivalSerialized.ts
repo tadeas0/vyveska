@@ -7,4 +7,5 @@ export interface ArrivalSerialized {
     isAtStop: boolean;
     tripId: string;
     node?: number;
+    vehicleType: number;
 }

@@ -1,8 +1,9 @@
 import type { Station } from "./Station";
+import type { VehicleType } from "./VehicleType";
 
 export interface Vehicle {
     name: string;
-    type: string;
+    type: VehicleType;
     positions: Position[];
 }
 
