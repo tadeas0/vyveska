@@ -40,25 +40,27 @@
 </script>
 
 <div class="py-2">
-    <button class="flex w-full items-end" on:click={handleShowMore}>
-        <h1 class="text-xl text-cyan-500 hover:underline">{arrival.name}</h1>
-        <span class="ml-2 text-left text-lg text-emerald-400">
-            {arrival.destination.fullName}
-        </span>
-        <div class="w-8 text-white">
-            <svelte:component this={icon} />
+    <button class="group w-full text-left hover:underline" on:click={handleShowMore}>
+        <div class="flex w-full items-end">
+            <h1 class="text-xl text-cyan-500 group-hover:underline">{arrival.name}</h1>
+            <span class="ml-2 text-left text-lg text-emerald-400 group-hover:underline">
+                {arrival.destination.fullName}
+            </span>
+            <div class="w-8 text-white">
+                <svelte:component this={icon} />
+            </div>
+            <span class="ml-auto rounded-3xl bg-slate-800 px-2 text-lg text-cyan-300">
+                {getFormattedTime(arrival.time)}
+            </span>
         </div>
-        <span class="ml-auto rounded-3xl bg-slate-800 px-2 text-lg text-cyan-300">
-            {getFormattedTime(arrival.time)}
-        </span>
+        {#if arrival.isAtStop}
+            <h3 class="text-lg text-gray-400 group-hover:underline">{$_("atStop")}</h3>
+        {:else}
+            <h3 class="text-lg text-teal-400 group-hover:underline">
+                {getDisplayDiff($currentTime, arrival.time)}
+            </h3>
+        {/if}
     </button>
-    {#if arrival.isAtStop}
-        <h3 class="text-lg text-gray-400">{$_("atStop")}</h3>
-    {:else}
-        <h3 class="text-lg  text-teal-400">
-            {getDisplayDiff($currentTime, arrival.time)}
-        </h3>
-    {/if}
     {#if isDropdownOpen && trip !== null}
         <ul transition:slide={{ duration: 200 }} class="rounded-lg bg-slate-800 p-2">
             {#each trip.stopTimes as st}
