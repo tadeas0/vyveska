@@ -4,7 +4,7 @@
     "minute": "{count, plural, =0 {# minut} one {# minuta} few {# minuty} other {# minut}}",
     "hour": "{count, plural, =0 {# hodin} one {# hodina} few {# hodiny} other {# hodin}}",
     "atStop": "Ve stanici",
-    "loading": "Načítání...",
+    "loading": "Načítání",
     "now": "Právě teď",
     "noVehicleData": "Žádná data pro toto vozidlo",
     "homeTitle": "Vývěska - Vyhledávání příjezdů autobusů, tramvají, metra",
