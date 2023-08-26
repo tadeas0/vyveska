@@ -86,9 +86,11 @@
                                 href={result.link}
                             >
                                 <div class="flex flex-row">
-                                    <h1 class="md:text-xl w-3/5">{result.name}</h1>
+                                    <h1 class="w-3/5 md:text-xl">{result.name}</h1>
                                     {#if result.altName}
-                                        <h1 class="md:text-md whitespace-nowrap w-2/5 overflow-ellipsis overflow-hidden text-gray-400">
+                                        <h1
+                                            class="md:text-md w-2/5 overflow-hidden overflow-ellipsis whitespace-nowrap text-gray-400"
+                                        >
                                             {result.altName}
                                         </h1>
                                     {/if}

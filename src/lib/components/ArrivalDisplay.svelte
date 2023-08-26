@@ -53,18 +53,18 @@
             </div>
             <h1>
                 <span class="mr-2 text-lg text-cyan-400">{arrival.name}</span>
-                <span class="text-md text-emerald-400">{arrival.destination.fullName}</span>
+                <span class="text-base text-emerald-400">{arrival.destination.fullName}</span>
             </h1>
-            <div class="w-8 text-white">
+            <div class="w-8 text-gray-300">
                 <svelte:component this={dropdownIcon} />
             </div>
         </div>
 
         <svelte:fragment slot="secondary-title">
             {#if arrival.isAtStop}
-                <h3 class="text-md text-gray-400">{$_("atStop")}</h3>
+                <h3 class="text-base text-gray-400">{$_("atStop")}</h3>
             {:else}
-                <h3 class="text-md text-teal-400">
+                <h3 class="text-base text-teal-400">
                     {getDisplayDiff($currentTime, arrival.time)}
                 </h3>
             {/if}
@@ -76,7 +76,7 @@
             {#await fetchTrip()}
                 <div
                     transition:slide|global={{ duration: 300, easing: cubicOut }}
-                    class="text-md flex animate-pulse items-center py-2 text-emerald-400"
+                    class="flex animate-pulse items-center py-2 text-base text-emerald-400"
                 >
                     <div class="mr-2 w-4"><MdAccessTime /></div>
                     <span>{$_("loading")}</span>
@@ -84,7 +84,7 @@
             {:then fetchedTrip}
                 <ul class="py-2" transition:slide|global={{ duration: 300, easing: cubicOut }}>
                     {#each fetchedTrip.stopTimes as st}
-                        <li class="text-md flex rounded-b-md text-white">
+                        <li class="flex rounded-b-md text-base">
                             <div class="w-5 self-center text-gray-400">
                                 <MdSubdirectoryArrowRight />
                             </div>
