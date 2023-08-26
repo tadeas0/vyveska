@@ -20,11 +20,14 @@ def download_stops():
         altKeys = ["name", "fullName", "idosName", "uniqueName"]
         names = set(i[alt] for alt in altKeys)
         gtfsIds = set()
+        lines = []
 
         for stop in i["stops"]:
             if stop["gtfsIds"]:
                 for id in stop["gtfsIds"]:
                     gtfsIds.add(id)
+            if stop["lines"]:
+                lines.extend(stop["lines"])
 
         if i["node"] not in nodes:
             nodes[i["node"]] = {
@@ -32,6 +35,7 @@ def download_stops():
                 "fullName": i["fullName"],
                 "node": i["node"],
                 "gtfsIds": [],
+                "lines": list(lines)
             }
         for name in names:
             if name not in nodes[i["node"]]["names"]:
