@@ -51,10 +51,8 @@
             <div class="mr-2 w-6 text-cyan-400">
                 <svelte:component this={vehicleIcon} />
             </div>
-            <h1>
-                <span class="mr-2 text-lg text-cyan-400">{arrival.name}</span>
-                <span class="text-base text-emerald-400">{arrival.destination.fullName}</span>
-            </h1>
+            <div class="mr-2 text-lg text-cyan-400">{arrival.name}</div>
+            <div class="text-base text-emerald-400">{arrival.destination.fullName}</div>
             <div class="w-8 text-gray-300">
                 <svelte:component this={dropdownIcon} />
             </div>
@@ -84,7 +82,7 @@
             {:then fetchedTrip}
                 <ul class="py-2" transition:slide|global={{ duration: 300, easing: cubicOut }}>
                     {#each fetchedTrip.stopTimes as st}
-                        <li class="flex rounded-b-md text-base">
+                        <li class="flex rounded-b-md text-base first:text-lg first:font-bold">
                             <div class="w-5 self-center text-gray-400">
                                 <MdSubdirectoryArrowRight />
                             </div>
