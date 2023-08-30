@@ -82,7 +82,7 @@
             {:then fetchedTrip}
                 <ul class="py-2" transition:slide|global={{ duration: 300, easing: cubicOut }}>
                     {#each fetchedTrip.stopTimes as st}
-                        <li class="flex rounded-b-md text-base">
+                        <li class="flex rounded-b-md text-base first:text-lg first:font-bold">
                             <div class="w-5 self-center text-gray-400">
                                 <MdSubdirectoryArrowRight />
                             </div>
