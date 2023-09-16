@@ -1,38 +1,29 @@
-# create-svelte
+# Vývěska
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+**Visit https://vyveska.xyz, to see a live version of the app**
 
-## Creating a project
+## What is it?
 
-If you're seeing this, you've probably already done this step. Congrats!
+Vývěska is a virtual departure board displaying information about buses, trains, metros, and other modes of transportation arriving at Prague stations. It can also be used to track the positions of individual vehicles.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## How does it work?
 
-# create a new project in my-app
-npm create svelte@latest my-app
+Vývěska utilises an API provided by [Prague Integrated Transport](https://pid.cz/), which contains real-time information about vehicle positions, arrivals, departures and delays.
+
+
+## How to run it?
+
+In order to run the application locally, you must first obtain an API key. You can find information on how to obtain one [here](https://api.golemio.cz/v2/docs/openapi/).
+
+After obtaining the API key, you need to create a `.env` file in the root of the repository. The API key should contain following information (replace parts marked with `${}` with your own data):
+
+```
+API_KEY=${Your API key}
+API_URL="https://api.golemio.cz/v2"
 ```
 
-## Developing
+After creating the `.env` file, you can run Vývěska in development mode using this command:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+```
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
